@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, Map, MessageSquare, Target, FolderKanban,
   HelpCircle, FileText, TrendingUp, ChevronLeft, ChevronRight,
-  Sparkles, LogOut,
+  Sparkles, LogOut, Zap
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +20,7 @@ const navItems = [
   { label: 'Interview', href: '/interview', icon: HelpCircle },
   { label: 'Resume', href: '/resume', icon: FileText },
   { label: 'Progress', href: '/progress', icon: TrendingUp },
+  { label: 'Upgrade ✦', href: '/pricing', icon: Zap },
 ];
 
 export default function Sidebar() {

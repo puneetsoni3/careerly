@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { saveProfile, saveSkills, saveOnboardingData, saveRoadmap } from '@/lib/store';
 import type { UserSkill, OnboardingData } from '@/lib/types';
+import AuthModal from '@/components/auth/AuthModal';
 
 const CAREER_PATHS = [
   { id: 'AI/ML Engineer', icon: '🤖', label: 'AI/ML Engineer', desc: 'Build intelligent systems with machine learning' },
@@ -63,6 +64,7 @@ export default function OnboardingPage() {
   const [obstacles, setObstacles] = useState<string[]>([]);
   const [generating, setGenerating] = useState(false);
   const [genStep, setGenStep] = useState(0);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const genSteps = [
     'Analyzing your profile...',
@@ -145,7 +147,7 @@ export default function OnboardingPage() {
       saveRoadmap(generateMockRoadmap(targetRole, timelineMonths * 4));
     }
 
-    router.push('/dashboard');
+    setShowAuthModal(true);
   };
 
   const canProceed = () => {
@@ -165,7 +167,8 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-6">
+    <>
+      <div className="min-h-screen flex items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-3xl">
         {/* Progress Steps */}
         <div className="flex items-center justify-center gap-2 mb-8">
@@ -521,5 +524,11 @@ export default function OnboardingPage() {
         )}
       </div>
     </div>
+      <AuthModal 
+        isOpen={showAuthModal}
+        onClose={() => router.push('/dashboard')}
+        onComplete={() => router.push('/dashboard')}
+      />
+    </>
   );
 }
